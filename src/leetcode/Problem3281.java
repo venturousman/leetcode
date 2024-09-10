@@ -9,17 +9,11 @@ public class Problem3281 {
 	public static int maxPossibleScore(int[] start, int d) {
 		int res = -1;
 		int low = 0;
-//		int high = Integer.MAX_VALUE;
+		int high = Integer.MAX_VALUE;
 		Arrays.sort(start);
 
-		int len = start.length;
-		int lastValue = start[len - 1];
-		int firstValue = start[0];
-		int high = lastValue - firstValue + d;
-
 		while (low <= high) {
-//			int mid = low + (high - low) / 2; // find mid is the result
-			int mid = (high + low) / 2; // find mid is the result
+			int mid = low + (high - low) / 2; // find mid is the result
 
 			if (isValid(start, d, mid)) {
 				res = mid;
