@@ -1,4 +1,4 @@
-package leetcode;
+package medium;
 
 public class Problem540 {
 
