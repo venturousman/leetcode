@@ -10,47 +10,45 @@ import java.util.Arrays;
 
 public class Problem2594 {
 
-	private static void printList(int[] a) {
-		var s = new StringBuilder();
-		for (int i = 0; i < a.length; i++) {
-			s.append(a[i] + " ");
-		}
-		System.out.println(s.toString());
-	}
+	public static boolean isValid(int[] ranks, int cars, long mins) {
+		if (mins % ranks[0] != 0)
+			return false;
 
-	public static long getMaxMinutes(int[] ranks, int[] assigned) {
-		long max = 0;
-		for (int i = 0; i < ranks.length; i++) {
-			long mins = ranks[i] * assigned[i] * assigned[i];
-			if (mins > max)
-				max = mins;
-		}
-		return max;
+		var assigned2 = mins / ranks[0];
+		var assigned = (long) Math.sqrt(assigned2);
+		if (assigned > cars)
+			return false;
+		var remainCars = cars - assigned;
+		var remainMachines = ranks.length - 1;
+		if (remainCars % remainMachines == 0)
+			return true;
+
+		return false;
 	}
 
 	// https://leetcode.com/problems/minimum-time-to-repair-cars/description/
 	public static long repairCars(int[] ranks, int cars) {
 
-		Arrays.sort(ranks);
+		long left = 0, right = 100 * 10 ^ 6 * 10 ^ 6;
+		while (left < right) {
+			long mid = left + (right - left) / 2;
 
-		var assigned = new int[ranks.length]; // assign assigned[i] cars for machine ith;
-		int remainCars = cars;
-		int avg = cars / ranks.length;
-		for (int i = ranks.length - 1; i > 0; i--) {
-			assigned[i] = avg;
-			remainCars -= avg;
+			long repairedCars = 0;
+			for (int r : ranks)
+				repairedCars += (long) Math.sqrt(mid / r);
+
+			if (repairedCars < cars)
+				left = mid + 1;
+			else
+				right = mid;
 		}
-		assigned[0] = remainCars;
-		long result = getMaxMinutes(ranks, assigned);
 
-		printList(assigned);
-
-		return result;
+		return left;
 	}
 
 	public static void main(String[] args) {
-//		System.out.println(repairCars(new int[] { 4, 2, 3, 1 }, 10));
-//		System.out.println(repairCars(new int[] { 5, 1, 8 }, 6));
+		System.out.println(repairCars(new int[] { 4, 2, 3, 1 }, 10));
+		System.out.println(repairCars(new int[] { 5, 1, 8 }, 6));
 		System.out.println(repairCars(new int[] { 3, 3, 1, 2, 1, 1, 3, 2, 1 }, 58));
 	}
 
