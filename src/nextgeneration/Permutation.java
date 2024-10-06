@@ -5,13 +5,13 @@ public class Permutation {
 	// n: total number of objects
 	// r: number of objects selected
 
-	public static void swap(int a[], int from, int to) {
+	public static void swap(int[] a, int from, int to) {
 		int temp = a[from];
 		a[from] = a[to];
 		a[to] = temp;
 	}
 
-	public static void reverse(int a[], int from, int to) {
+	public static void reverse(int[] a, int from, int to) {
 		int b = from, e = to;
 		while (b < e) {
 			swap(a, b, e);
@@ -21,7 +21,7 @@ public class Permutation {
 	}
 
 	// Liet ke hoan vi
-	public static boolean nextGeneration(int b[], int n) {
+	public static boolean nextGeneration(int[] b, int n) {
 
 		// If the given dataset is empty or contains only one element next_permutation
 		// is not possible
