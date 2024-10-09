@@ -7,7 +7,7 @@ public class Problem76 {
 	public static String minWindow(String word1, String word2) {
 		int size = 58; // not 26; [A-Z] and [a-z]
 		char initialC = 'A'; // not 'a'
-		int[] v = new int[58];
+		int[] v = new int[size];
 		for (char c : word2.toCharArray()) {
 			v[c - initialC]++;
 		}

@@ -1,8 +1,5 @@
 package medium;
 
-import java.util.Arrays;
-import java.util.Iterator;
-
 public class Problem875 {
 
 	public static boolean isValid(int[] piles, int h, int mid) {

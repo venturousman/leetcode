@@ -1,7 +1,5 @@
 package medium;
 
-import java.util.Arrays;
-
 /*
  * 1 <= ranks.length <= 10^5
  * 1 <= ranks[i] <= 100

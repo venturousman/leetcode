@@ -1,13 +1,5 @@
 package medium;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-
-import javax.swing.event.ListSelectionEvent;
-
 public class Problem3297 {
 
 	// https://leetcode.com/problems/count-substrings-that-can-be-rearranged-to-contain-a-string-i/
