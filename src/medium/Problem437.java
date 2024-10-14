@@ -2,33 +2,9 @@ package medium;
 
 import java.util.HashMap;
 
-class TreeNode {
-	int val;
-	TreeNode left;
-	TreeNode right;
-
-	TreeNode() {
-	}
-
-	TreeNode(int val) {
-		this.val = val;
-	}
-
-	TreeNode(int val, TreeNode left, TreeNode right) {
-		this.val = val;
-		this.left = left;
-		this.right = right;
-	}
-}
+import models.TreeNode;
 
 public class Problem437 {
-
-	static TreeNode newNode(int val) {
-		TreeNode node = new TreeNode();
-		node.val = val;
-		node.left = node.right = null;
-		return (node);
-	}
 
 	// https://leetcode.com/problems/path-sum-iii/
 	public static int count(TreeNode node, long sum) {
@@ -69,9 +45,9 @@ public class Problem437 {
 	public static void main(String[] args) {
 		// Input: root = [5,3,null,-3], targetSum = 5
 		// Output: 2
-		TreeNode node = newNode(5);
-		node.left = newNode(3);
-		node.left.left = newNode(-3);
+		TreeNode node = TreeNode.newNode(5);
+		node.left = TreeNode.newNode(3);
+		node.left.left = TreeNode.newNode(-3);
 		System.out.println(pathSum(node, 5));
 		System.out.println(pathSum2(node, 5));
 
