@@ -1,5 +1,7 @@
 package medium;
 
+// https://leetcode.com/problems/longest-happy-string/description/?envType=daily-question&envId=2024-10-16
+
 public class Problem1405 {
 
 	public static String longestDiverseString(StringBuilder x, StringBuilder y, StringBuilder z) {
