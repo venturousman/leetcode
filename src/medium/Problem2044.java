@@ -14,7 +14,7 @@ public class Problem2044 {
 		return true;
 	}
 
-	public static int countMaxOrSubsets(int[] nums) {
+	public static int countMaxOrSubsets2(int[] nums) {
 		int max = 0;
 		for (int i = 0; i < nums.length; i++) {
 			max |= nums[i];
@@ -34,6 +34,40 @@ public class Problem2044 {
 				count++;
 		}
 		return count;
+	}
+
+	// https://leetcode.com/problems/count-number-of-maximum-bitwise-or-subsets/solutions/1525309/java-c-python-dp-solution/?envType=daily-question&envId=2024-10-18
+	public static int countMaxOrSubsets1(int[] nums) {
+		int max = 0, dp[] = new int[1 << 17];
+		dp[0] = 1;
+		for (int a : nums) {
+			for (int i = max; i >= 0; --i)
+				dp[i | a] += dp[i];
+			max |= a;
+		}
+		return dp[max];
+	}
+
+	private static int res = 0;
+
+	public static int countMaxOrSubsets(int[] nums) {
+		res = 0;
+		int maxOR = 0;
+		for (int i = 0; i < nums.length; ++i)
+			maxOR |= nums[i];
+		// maxOR is now the maximum bitwise OR.
+		maxSubset(nums, 0, 0, maxOR);
+		return res;
+	}
+
+	private static void maxSubset(int[] arr, int i, int curOr, int maxOR) {
+		if (i == arr.length) {
+			if (curOr == maxOR)
+				++res;
+			return;
+		}
+		maxSubset(arr, i + 1, curOr | arr[i], maxOR); // include it
+		maxSubset(arr, i + 1, curOr, maxOR); // skip it
 	}
 
 	public static void printList(int b[]) {
