@@ -44,7 +44,6 @@ public class Problem875 {
 	}
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
 		System.out.println("Case 1: " + minEatingSpeed(new int[] { 3, 6, 7, 11 }, 8)); // expect the output = 4
 		System.out.println("Case 1: " + minEatingSpeed(new int[] { 30, 11, 23, 4, 20 }, 5)); // expect the output = 30
 		System.out.println("Case 1: " + minEatingSpeed(new int[] { 30, 11, 23, 4, 20 }, 6)); // expect the output = 23
