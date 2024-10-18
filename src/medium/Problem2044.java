@@ -2,6 +2,7 @@ package medium;
 
 public class Problem2044 {
 
+	// ======== list out binary sequences
 	public static boolean createNextGeneration(int b[]) {
 		int i = b.length - 1;
 		while (i >= 0 && b[i] != 0)
@@ -14,7 +15,7 @@ public class Problem2044 {
 		return true;
 	}
 
-	public static int countMaxOrSubsets2(int[] nums) {
+	public static int countMaxOrSubsets1(int[] nums) {
 		int max = 0;
 		for (int i = 0; i < nums.length; i++) {
 			max |= nums[i];
@@ -37,7 +38,7 @@ public class Problem2044 {
 	}
 
 	// https://leetcode.com/problems/count-number-of-maximum-bitwise-or-subsets/solutions/1525309/java-c-python-dp-solution/?envType=daily-question&envId=2024-10-18
-	public static int countMaxOrSubsets1(int[] nums) {
+	public static int countMaxOrSubsets(int[] nums) {
 		int max = 0, dp[] = new int[1 << 17];
 		dp[0] = 1;
 		for (int a : nums) {
@@ -48,10 +49,11 @@ public class Problem2044 {
 		return dp[max];
 	}
 
+	// ======== backtracking
 	private static int res = 0;
 
-	public static int countMaxOrSubsets(int[] nums) {
-		res = 0;
+	public static int countMaxOrSubsets2(int[] nums) {
+		res = 0; // reset
 		int maxOR = 0;
 		for (int i = 0; i < nums.length; ++i)
 			maxOR |= nums[i];
