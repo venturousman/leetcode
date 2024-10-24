@@ -50,7 +50,7 @@ public class Problem2641 {
 		node.left.left = TreeNode.newNode(1);
 		node.left.right = TreeNode.newNode(10);
 		node.right.right = TreeNode.newNode(7);
-		var newNode = replaceValueInTree(node);
+		replaceValueInTree(node);
 
 		// [904,416,765,705,null,null,14,null,null,821,754,774,30,null,548
 		// ,905,879,363,130,494,null,null,451,327,414,null,null,null,null
