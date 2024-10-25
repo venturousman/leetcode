@@ -1,0 +1,149 @@
+class Solution {
+    
+    public void swap(int a[], int from, int to) {
+		int temp = a[from];
+		a[from] = a[to];
+		a[to] = temp;
+	}
+
+	public void reverse(int a[], int from, int to) {
+		int b = from, e = to;
+		while (b < e) {
+			swap(a, b, e);
+			b++;
+			e--;
+		}
+	}
+
+	// Liet ke hoan vi
+	public boolean nextGeneration(int b[], int n) {
+		int i = n - 1;
+		while (i > 0 && b[i] > b[i + 1])
+			i--;
+		if (i == 0)
+			return false;
+
+		int k = n;
+		while (b[k] < b[i])
+			k--;
+
+		swap(b, k, i);
+		reverse(b, i + 1, n);
+		return true;
+	}
+    
+    public void printList(int[] a, int n) {
+		for (int i = 1; i <= n; i++)
+			System.out.print(a[i] + " ");
+		System.out.println();
+	}
+    
+    public String convert(int num) {
+        StringBuilder s = new StringBuilder();
+        int n = num;
+        int remainder = 0;
+        do {
+            remainder = n % 2;
+            s.insert(0, remainder + "");
+            n = n / 2;
+        } while (n > 0);
+        // System.out.println(s.toString());
+        return s.toString();
+    }
+    
+    public int maxGoodNumber(int[] nums) {
+        //convert(30);
+        int max = 0;
+        int n = nums.length;
+
+        int[] a = new int[n + 1];
+        for (int i = 1; i <= n; i++)
+			a[i] = nums[i-1];
+
+        do {
+			// printList(a, n);
+            StringBuilder s = new StringBuilder();
+            for (int i = 1; i <= n; i++) {
+                String sub = convert(a[i]);
+                s.append(sub);
+            }
+            // System.out.println(s.toString());
+            Integer i = Integer.parseInt(s.toString(), 2);
+            // System.out.println(i + "");
+            if (i > max) max = i;
+		} while (nextGeneration(a, n));
+        return max;
+    }
+}
+========================
+
+class Solution {
+    public boolean check(int[] nums, int mid) {
+        // Integer i = Integer.parseInt(s, base);
+        int base = 2;
+        String s = Integer.toString(mid, base);
+        System.out.println(mid + " - " + s);
+        for (int i = 0; i < nums.length; i++) {
+            String sub = Integer.toString(nums[i], base);
+            if (!s.contains(sub)) {
+                System.out.println(sub + "- false");
+                return false;
+            }
+        }
+        return true;
+    }
+    
+    public int maxGoodNumber(int[] nums) {
+        // Arrays.sort(nums);
+        // Arrays.sort(nums, Collections.reverseOrder());
+        // Sort the array in descending order using the Stream API
+        int[] sortedArr = Arrays.stream(nums)
+                .boxed()
+                .sorted(Collections.reverseOrder())
+                .mapToInt(Integer::intValue)
+                .toArray();
+
+        // for (int i = 0; i < sortedArr.length; i++) System.out.println(sortedArr[i]);
+        int left = 1;
+        int right = Integer.MAX_VALUE;
+        while (left <= right) {
+            int mid = left + (right - left) / 2;
+            if (check(sortedArr, mid)) {
+                left = mid + 1;
+            } else {
+                right = mid - 1;
+            }
+        }
+        return left;
+    }
+}
+
+======================
+
+https://leetcode.com/contest/weekly-contest-418/problems/maximum-possible-number-by-binary-concatenation/
+https://leetcode.com/contest/weekly-contest-418/problems/remove-methods-from-project/
+https://leetcode.com/contest/weekly-contest-418/problems/construct-2d-grid-matching-graph-layout/
+https://leetcode.com/contest/weekly-contest-418/problems/sorted-gcd-pair-queries/
+
+
+https://stackoverflow.com/a/19607058
+
+
+Q1: Try all permutations, N = 3.
+Q2: DFS from k, counting vertices seen as V, and also union-find every adjacent pair of vertices. If the size of k's connected component is V, you can remove the whole component, otherwise remove nothing.
+Q3: Many ways to do this, here's mine: if there is a vertex with exactly one edge, follow it to the end as a 1xN. Otherwise, build the top row by starting with a corner, and attaching the lowest-outgoing-count number until you hit another corner. Then fill the rows one by one.
+Q4: Classic GCD-counting problem in N log N. First get a frequency count of nums, then traverse from g = maxval to 1, getting the total number of pairs that are multiples of g, and subtracting gcd count for 2g, 3g, etc. Build prefix sums of these and use binary search to execute queries.
+
+
+
+binary_nums: List[str] = [bin(number)[2:] for number in nums]
+
+        max_number = -inf
+        max_number = max(max_number, int(binary_nums[0] + binary_nums[1] + binary_nums[2], 2))
+        max_number = max(max_number, int(binary_nums[0] + binary_nums[2] + binary_nums[1], 2))
+        max_number = max(max_number, int(binary_nums[1] + binary_nums[0] + binary_nums[2], 2))
+        max_number = max(max_number, int(binary_nums[1] + binary_nums[2] + binary_nums[0], 2))
+        max_number = max(max_number, int(binary_nums[2] + binary_nums[0] + binary_nums[1], 2))
+        max_number = max(max_number, int(binary_nums[2] + binary_nums[1] + binary_nums[0], 2))
+
+        return max_number
