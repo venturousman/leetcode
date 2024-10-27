@@ -1,0 +1,24 @@
+Bài 2 simple mà, tạo 1 mảng đếm từng phần thử, mỗi lần transform thì shift tất cả qua phải 1 đơn vị, riêng thằng cuối là thằng z thì cộng cho a và b
+
+
+
+Bài 3 thì dp gọi f[k][gcd_a][gcd_b] là số cách chia first k numbers thành 2 tập sao cho tập 1 có gcd là gcd_a và tập 2 có gcd là gcd_b
+thì có 3 cases xảy ra:
+- ko thêm số thứ k vào tập nào cả => f[k][i][j] = f[k-1][i][j]
+- thêm số thứ k vào tập 1 => f[k][gcd(i, nums[k])][j] += f[k-1][i][j]
+- thêm số thứ k vào tập 2 => f[k][i][gcd(j, nums[k])] += f[k-1][i][j]
+
+Kết quả là sum(f[n][x][x] với mọi x từ 0 tới 200)
+
+
+
+
+
+
+
+https://leetcode.com/contest/weekly-contest-421/
+
+https://leetcode.com/problems/find-the-maximum-factor-score-of-array/description/
+https://leetcode.com/problems/total-characters-in-string-after-transformations-i/description/
+https://leetcode.com/problems/find-the-number-of-subsequences-with-equal-gcd/description/
+https://leetcode.com/problems/total-characters-in-string-after-transformations-ii/description/
