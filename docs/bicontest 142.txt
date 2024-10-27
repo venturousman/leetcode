@@ -1,0 +1,7 @@
+
+https://leetcode.com/contest/biweekly-contest-142/
+
+https://leetcode.com/problems/find-the-original-typed-string-i/description/
+https://leetcode.com/problems/find-subtree-sizes-after-changes/description/
+https://leetcode.com/problems/maximum-points-tourist-can-earn/description/
+https://leetcode.com/problems/find-the-original-typed-string-ii/description/
