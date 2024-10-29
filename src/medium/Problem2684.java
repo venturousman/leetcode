@@ -12,12 +12,18 @@ import java.lang.Math;
 
 public class Problem2684 {
 
+	// directions
 	static int[] dr = { -1, 0, 1 };
 	static int[] dc = { 1, 1, 1 };
 
-	private static int dfs(int[][] grid, int rows, int cols, int r, int c) {
+	private static int dfs(int[][] grid, int rows, int cols, int r, int c, int[][] cache) {
+		// if we are at the last column, no further moves are possible
 		if (c == cols - 1)
 			return 0;
+
+		// if already computed, return the stored result
+		if (cache[r][c] > 0)
+			return cache[r][c];
 
 		int moves = 0;
 		for (int i = 0; i < 3; i++) {
@@ -26,9 +32,13 @@ public class Problem2684 {
 			boolean isValidR = (newR >= 0 && newR < rows);
 			boolean isValidC = (newC >= 0 && newC < cols);
 			if (isValidR && isValidC && grid[newR][newC] > grid[r][c]) {
-				moves = Math.max(moves, 1 + dfs(grid, rows, cols, newR, newC));
+				moves = Math.max(moves, 1 + dfs(grid, rows, cols, newR, newC, cache));
 			}
 		}
+
+		// store the result into cache
+		cache[r][c] = moves;
+
 		return moves;
 	}
 
@@ -36,8 +46,9 @@ public class Problem2684 {
 		int rows = grid.length;
 		int cols = grid[0].length;
 		int max = 0;
+		int[][] cache = new int[rows][cols];
 		for (int r = 0; r < rows; r++) {
-			max = Math.max(max, dfs(grid, rows, cols, r, 0));
+			max = Math.max(max, dfs(grid, rows, cols, r, 0, cache));
 		}
 		return max;
 	}
