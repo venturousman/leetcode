@@ -4,7 +4,7 @@ package easy;
 
 public class Problem1957 {
 
-	public static String makeFancyString(String s) {
+	public static String makeFancyString1(String s) {
 		var sb = new StringBuilder();
 		int i = 0;
 		while (i < s.length()) {
@@ -18,6 +18,23 @@ public class Problem1957 {
 				continue;
 			}
 			i++;
+		}
+		return sb.toString();
+	}
+
+	public static String makeFancyString(String s) {
+		int sameCount = 0;
+		StringBuilder sb = new StringBuilder();
+		char prev = s.charAt(0);
+		for (char cur : s.toCharArray()) {
+			if (cur == prev) {
+				sameCount++;
+			} else {
+				sameCount = 1;
+			}
+			if (sameCount < 3)
+				sb.append(cur);
+			prev = cur;
 		}
 		return sb.toString();
 	}
