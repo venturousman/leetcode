@@ -8,23 +8,25 @@ public class Problem3133 {
         long accAnd = x;
         for (int i = 1; i < n; i++) {
             long num = nums[i - 1];
-            int bitLength = Long.toBinaryString(num).length();
-            long allBitsSetNumber = (1 << bitLength) - 1;
-            // System.out.println(bitLength);
-            if (allBitsSetNumber == num) {
-                int k = bitLength + 1;
-                allBitsSetNumber = (1 << k) - 1;
-            }
-            // System.out.println(allBitsSetNumber);
-            // System.out.println("------");
-            for (long j = num + 1; j <= allBitsSetNumber; j++) {
-                if ((j & accAnd) == x) {
-//                    System.out.println(j);
-                    nums[i] = j;
-                    accAnd = accAnd & j;
-                    break;
+            
+            // Generate the next number within a reasonable range based on the highest bit.
+            long allBitsSetNumber = (Long.highestOneBit(num) << 1) - 1;
+//            System.out.println(Long.highestOneBit(num));
+//            System.out.println(allBitsSetNumber);
+//            System.out.println("------");
+            long next = num + 1;
+
+            // Find the smallest number greater than `num` that satisfies the condition
+            while ((next & accAnd) != x) {
+                next++;
+                if (next > allBitsSetNumber) {
+                    allBitsSetNumber = (Long.highestOneBit(allBitsSetNumber) << 1) - 1;
                 }
             }
+            
+            nums[i] = next;
+            accAnd &= next;
+            
             // System.out.println(Arrays.toString(nums));
         }
         // System.out.println(Arrays.toString(nums));
