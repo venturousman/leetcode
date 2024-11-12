@@ -26,21 +26,21 @@ public class Sorting {
 		}
 	}
 
-	// Idea: ta sẽ sxếp lần lượt từng đoạn gồm 1 ptử đầu tiên, 2 ptử đầu tiên, ..., N ptử.
+	// Idea: ta sẽ sxếp lần lượt từng đoạn gồm 1 ptử đầu tiên, 2 ptử đầu tiên, ...,
+	// N ptử.
 	// giả sử đã sxep xong i ptu, -> tim vi tri phù hợp của ptu i+1 và "chèn" nó vào
 	// O(n^2)
 	private static void insertionSort(int[] a) {
 		int n = a.length;
+		// ptu đầu tiên đã sxep rồi
 		for (int i = 1; i < n; i++) {
+			int tmp = a[i]; // giu lai gia tri a[i]
 			// Tìm vị trí phù hợp cho i
 			int j = i;
-			while (j > 0 && a[i] < a[j - 1])
+			while (j > 0 && tmp < a[j - 1]) {
+				a[j] = a[j - 1]; // đưa i về đúng vị trí, move các ptu qua phải
 				--j;
-
-			// Đưa i về đúng vị trí, move các ptu qua phải
-			int tmp = a[i]; // giu lai gia tri a[i]
-			for (int k = i; k > j; k--)
-				a[k] = a[k - 1];
+			}
 			a[j] = tmp;
 		}
 	}
@@ -51,6 +51,14 @@ public class Sorting {
 //		bubbleSort(a);
 		insertionSort(a);
 		System.out.println(Arrays.toString(a));
+
+		System.out.println("----------------------");
+
+		int[] b = new int[] { 59, 41, 35, 27, 14 };
+		System.out.println(Arrays.toString(b));
+//		bubbleSort(b);
+		insertionSort(b);
+		System.out.println(Arrays.toString(b));
 	}
 
 }
