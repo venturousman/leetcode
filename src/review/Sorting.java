@@ -45,11 +45,33 @@ public class Sorting {
 		}
 	}
 
+	// lượt 1, tìm ptu nhỏ nhất trong dãy a[1..n], swap nó vs a[1], khi đó a[1] là
+	// ptu nhỏ nhất
+	// lượt 2, tìm ptu nhỏ nhất trong dãy a[2..n], swap nó vs a[2], ...
+	// ...
+	private static void selectionSort(int[] a) {
+		int n = a.length;
+		for (int i = 0; i < n - 1; i++) {
+			int jmin = i;
+			for (int j = i + 1; j < n; j++) {
+				if (a[j] < a[jmin])
+					jmin = j;
+			}
+			if (jmin != i) {
+				// swap
+				int tmp = a[i];
+				a[i] = a[jmin];
+				a[jmin] = tmp;
+			}
+		}
+	}
+
 	public static void main(String[] args) {
 		int[] a = new int[] { 29, 10, 14, 37, 14 };
 		System.out.println(Arrays.toString(a));
 //		bubbleSort(a);
-		insertionSort(a);
+//		insertionSort(a);
+		selectionSort(a);
 		System.out.println(Arrays.toString(a));
 
 		System.out.println("----------------------");
@@ -57,7 +79,8 @@ public class Sorting {
 		int[] b = new int[] { 59, 41, 35, 27, 14 };
 		System.out.println(Arrays.toString(b));
 //		bubbleSort(b);
-		insertionSort(b);
+//		insertionSort(b);
+		selectionSort(b);
 		System.out.println(Arrays.toString(b));
 	}
 
