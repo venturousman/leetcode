@@ -10,8 +10,7 @@ public class Sorting {
 	private static void bubbleSort(int[] a) {
 		int n = a.length;
 		// step 2. lặp đến khi k còn 2 ptu nào thỏa mãn
-		// -> số lần lặp k quá n - 1 lần, do 1 ptu chỉ có thể nổi lên trên k quá n - 1
-		// lần
+		// -> số lần lặp k quá n-1 lần, do 1 ptu chỉ có thể nổi lên trên k quá n-1 lần
 		for (int i = 0; i < n; i++) {
 			// step 1. xet 2 ptu lien tiep, neu pt sau < ptu truoc, swap
 			// -> ptu nhỏ hơn sẽ nổi lên trên
@@ -66,8 +65,16 @@ public class Sorting {
 		}
 	}
 
+	// pros: O(N*logN), stable
+	// cons: more space to store
+	private static void mergeSort(int[] a) {
+
+	}
+
 	public static void main(String[] args) {
-		int[] a = new int[] { 29, 10, 14, 37, 14 };
+//		int[] a = { 29, 10, 14, 37, 14 };
+		// 4,2,4,1
+		int[] a = { 7, 2, 8, 4, 3, 2, 1, 8 };
 		System.out.println(Arrays.toString(a));
 //		bubbleSort(a);
 //		insertionSort(a);
@@ -76,12 +83,12 @@ public class Sorting {
 
 		System.out.println("----------------------");
 
-		int[] b = new int[] { 59, 41, 35, 27, 14 };
-		System.out.println(Arrays.toString(b));
-//		bubbleSort(b);
-//		insertionSort(b);
-		selectionSort(b);
-		System.out.println(Arrays.toString(b));
+//		int[] b = { 59, 41, 35, 27, 14 };
+//		System.out.println(Arrays.toString(b));
+////		bubbleSort(b);
+////		insertionSort(b);
+//		selectionSort(b);
+//		System.out.println(Arrays.toString(b));
 	}
 
 }
