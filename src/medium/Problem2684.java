@@ -9,6 +9,9 @@ import java.lang.Math;
  * 4 <= m * n <= 105
  * 1 <= grid[i][j] <= 106
  */
+import java.util.Arrays;
+
+// https://leetcode.com/problems/maximum-number-of-moves-in-a-grid/description/?envType=daily-question&envId=2024-10-29
 
 public class Problem2684 {
 
@@ -53,12 +56,51 @@ public class Problem2684 {
 		return max;
 	}
 
+	private static void printBoard(int[][] arr) {
+		System.out.println(Arrays.deepToString(arr));
+	}
+
+	// TODO: 2nd approach - dynamic programming
+	// reverse directions
+	static int[] dr2 = { -1, 0, 1 };
+	static int[] dc2 = { -1, -1, -1 };
+
+	private static void dp(int[][] grid) {
+		int rows = grid.length;
+		int cols = grid[0].length;
+		int[][] b = new int[rows][cols];
+		int newR, newC;
+		boolean isValidR, isValidC;
+		for (int r = 0; r < rows; r++) {
+			b[r][0] = 1;
+			for (int c = 1; c < cols; c++) {
+
+				int max = 0;
+				for (int i = 0; i < 3; i++) {
+					newR = r + dr2[i];
+					newC = c + dc2[i];
+					isValidR = (newR >= 0 && newR < rows);
+					isValidC = (newC >= 0 && newC < cols);
+					if (isValidR && isValidC && grid[newR][newC] <= grid[r][c]) {
+						max = Math.max(max, b[newR][newC]);
+					}
+				}
+				if (max > 0)
+					b[r][c] = 1 + max;
+			}
+		}
+		printBoard(b);
+	}
+
 	public static void main(String[] args) {
 		System.out
 				.println(maxMoves(new int[][] { { 2, 4, 3, 5 }, { 5, 4, 9, 3 }, { 3, 4, 2, 11 }, { 10, 9, 13, 15 } }));
 		System.out.println(maxMoves(new int[][] { { 3, 2, 4 }, { 2, 1, 9 }, { 1, 1, 7 } }));
 //		System.out.println();
 //		System.out.println();
+
+//		dp(new int[][] { { 2, 4, 3, 5 }, { 5, 4, 9, 3 }, { 3, 4, 2, 11 }, { 10, 9, 13, 15 } });
+		dp(new int[][] { { 3, 2, 4 }, { 2, 1, 9 }, { 1, 1, 7 } });
 	}
 
 }
